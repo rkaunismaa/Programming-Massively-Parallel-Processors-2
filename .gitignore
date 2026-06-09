@@ -40,3 +40,8 @@ Thumbs.db
 
 # Resume/tracking
 Claude_Resume.txt
+# ch08_stencil binaries
+chapters/ch08_stencil/ch08_basic_stencil
+chapters/ch08_stencil/ch08_tiled_stencil
+chapters/ch08_stencil/ch08_coarsened_stencil
+chapters/ch08_stencil/ch08_register_tiling_stencil

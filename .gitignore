@@ -1,0 +1,29 @@
+# CUDA binaries (compiled kernels)
+chapters/ch0[12345]_*/*!(README|EXERCISES_SOLUTIONS|*.cu|*.cuh|*.md)
+chapters/ch02_heterogeneous_data_parallel/vec_add_baseline
+chapters/ch03_multidimensional_grids_data/color_to_grayscale
+chapters/ch03_multidimensional_grids_data/image_blur
+chapters/ch03_multidimensional_grids_data/matrix_mul
+chapters/ch02_heterogeneous_data_parallel/exercises/ex01
+chapters/ch02_heterogeneous_data_parallel/exercises/ex02
+chapters/ch02_heterogeneous_data_parallel/exercises/ex03
+chapters/ch03_multidimensional_grids_data/exercises/ex01a
+chapters/ch03_multidimensional_grids_data/exercises/ex01b
+chapters/ch03_multidimensional_grids_data/exercises/ex02_matvec
+
+# Build artifacts
+build/
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Resume/tracking
+Claude_Resume.txt

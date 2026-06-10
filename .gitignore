@@ -45,3 +45,10 @@ chapters/ch08_stencil/ch08_basic_stencil
 chapters/ch08_stencil/ch08_tiled_stencil
 chapters/ch08_stencil/ch08_coarsened_stencil
 chapters/ch08_stencil/ch08_register_tiling_stencil
+# ch09_histogram binaries
+chapters/ch09_histogram/ch09_basic_histogram
+chapters/ch09_histogram/ch09_privatized_global
+chapters/ch09_histogram/ch09_privatized_shared
+chapters/ch09_histogram/ch09_coarsened_contiguous
+chapters/ch09_histogram/ch09_coarsened_interleaved
+chapters/ch09_histogram/ch09_aggregated

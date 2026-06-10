@@ -19,8 +19,8 @@ All code targets a **NVIDIA GeForce GTX 1050** (Pascal, sm_61, 5 SMs, 2 GB VRAM)
 | 5 | Memory Architecture & Data Locality | tiled_matmul (static, dynamic, boundary) | ✅ |
 | 6 | Performance Considerations | memory_coalescing_demo, corner_turning, thread_coarsening | ✅ |
 | 7 | Convolution | basic, constant_memory, tiled, cached_halo | ✅ |
-| **8** | **Stencil** | **basic, tiled, coarsened, register_tiling** | **✅** |
-| 9 | Parallel Histogram | — | ⏳ |
+| 8 | Stencil | basic, tiled, coarsened, register_tiling | ✅ |
+| **9** | **Parallel Histogram** | **basic, privatized_global, privatized_shared, coarsened_contiguous, coarsened_interleaved, aggregated** | **✅** |
 | 10 | Reduction & Minimizing Divergence | — | ⏳ |
 | 11 | Prefix Sum (Scan) | — | ⏳ |
 | 12–19 | (Advanced topics) | — | ⏳ |

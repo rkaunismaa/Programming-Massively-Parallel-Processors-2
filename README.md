@@ -42,6 +42,19 @@ An RTX 4090 (device 0, sm_89) is also available on the same system for compariso
 
 ---
 
+## Model Attribution
+
+Chapters in this project were created using different LLM models:
+
+| Chapter(s) | Model |
+|------------|-------|
+| 1–7 | Qwen 3.6-27B (via LM Studio, hosted at `https://lmstudio.ai/models/qwen/qwen3.6-27b`) |
+| 8+ | DeepSeek V4 Flash |
+
+This information is tracked in case code style, naming conventions, or behavioural quirks need tracing back to a particular model.
+
+---
+
 ## Project Structure
 
 ```

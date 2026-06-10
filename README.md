@@ -1,6 +1,6 @@
 # Programming Massively Parallel Processors — CUDA Implementation
 
-<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-8%20chapters%20complete-blue" alt="Chapters">
+<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-9%20chapters%20complete-blue" alt="Chapters">
 
 Hands-on CUDA implementations of every kernel from **Programming Massively Parallel Processors: A Hands-on Approach** (4th Edition, Kirk, Hwu & El Hajj, Morgan Kaufmann 2023).
 
@@ -21,7 +21,7 @@ All code targets a **NVIDIA GeForce GTX 1050** (Pascal, sm_61, 5 SMs, 2 GB VRAM)
 | 7 | Convolution | basic, constant_memory, tiled, cached_halo | ✅ |
 | 8 | Stencil | basic, tiled, coarsened, register_tiling | ✅ |
 | **9** | **Parallel Histogram** | **basic, privatized_global, privatized_shared, coarsened_contiguous, coarsened_interleaved, aggregated** | **✅** |
-| 10 | Reduction & Minimizing Divergence | — | ⏳ |
+| 10 | Reduction & Minimizing Divergence | simple, convergent, shared_memory, multiblock, coarsened | ✅ |
 | 11 | Prefix Sum (Scan) | — | ⏳ |
 | 12–19 | (Advanced topics) | — | ⏳ |
 

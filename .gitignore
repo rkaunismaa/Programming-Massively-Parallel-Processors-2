@@ -52,3 +52,9 @@ chapters/ch09_histogram/ch09_privatized_shared
 chapters/ch09_histogram/ch09_coarsened_contiguous
 chapters/ch09_histogram/ch09_coarsened_interleaved
 chapters/ch09_histogram/ch09_aggregated
+# ch10_reduction binaries
+chapters/ch10_reduction/ch10_simple_reduction
+chapters/ch10_reduction/ch10_convergent_reduction
+chapters/ch10_reduction/ch10_shared_memory_reduction
+chapters/ch10_reduction/ch10_multiblock_reduction
+chapters/ch10_reduction/ch10_coarsened_reduction

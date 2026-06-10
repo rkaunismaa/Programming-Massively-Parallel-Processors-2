@@ -1,6 +1,6 @@
 # Programming Massively Parallel Processors — CUDA Implementation
 
-<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-9%20chapters%20complete-blue" alt="Chapters">
+<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-11%20chapters%20complete-blue" alt="Chapters">
 
 Hands-on CUDA implementations of every kernel from **Programming Massively Parallel Processors: A Hands-on Approach** (4th Edition, Kirk, Hwu & El Hajj, Morgan Kaufmann 2023).
 
@@ -22,7 +22,7 @@ All code targets a **NVIDIA GeForce GTX 1050** (Pascal, sm_61, 5 SMs, 2 GB VRAM)
 | 8 | Stencil | basic, tiled, coarsened, register_tiling | ✅ |
 | **9** | **Parallel Histogram** | **basic, privatized_global, privatized_shared, coarsened_contiguous, coarsened_interleaved, aggregated** | **✅** |
 | 10 | Reduction & Minimizing Divergence | simple, convergent, shared_memory, multiblock, coarsened | ✅ |
-| 11 | Prefix Sum (Scan) | — | ⏳ |
+| **11** | **Prefix Sum (Scan)** | **Kogge-Stone, Brent-Kung, coarsened, hierarchical segmented** | **✅** |
 | 12–19 | (Advanced topics) | — | ⏳ |
 
 ---
@@ -96,6 +96,27 @@ PMPP/
 │   │   ├── ch08_tiled_stencil.cu
 │   │   ├── ch08_coarsened_stencil.cu
 │   │   ├── ch08_register_tiling_stencil.cu
+│   │   └── README.md
+│   ├── ch09_histogram/
+│   │   ├── ch09_basic_histogram.cu
+│   │   ├── ch09_privatized_global.cu
+│   │   ├── ch09_privatized_shared.cu
+│   │   ├── ch09_coarsened_contiguous.cu
+│   │   ├── ch09_coarsened_interleaved.cu
+│   │   ├── ch09_aggregated.cu
+│   │   └── README.md
+│   ├── ch10_reduction/
+│   │   ├── ch10_simple_reduction.cu
+│   │   ├── ch10_convergent_reduction.cu
+│   │   ├── ch10_shared_memory_reduction.cu
+│   │   ├── ch10_multiblock_reduction.cu
+│   │   ├── ch10_coarsened_reduction.cu
+│   │   └── README.md
+│   ├── ch11_prefix_scan/
+│   │   ├── ch11_kogge_stone_scan.cu
+│   │   ├── ch11_brent_kung_scan.cu
+│   │   ├── ch11_coarsened_scan.cu
+│   │   ├── ch11_segmented_scan.cu
 │   │   └── README.md
 │   └── ...               # Future chapters
 ├── .gitignore
@@ -176,6 +197,38 @@ All kernels share a common header providing:
 | Register tiling | — | **0.077 ms** | **40.34** | — | 4 KB shared mem, +2 regs |
 
 > **Note:** Chapter 8 results use a small 64³ grid where the basic kernel is fastest because the entire dataset fits in L2 cache. Tiling benefits emerge at much larger grid sizes typical in HPC.
+
+### Chapter 9 (Parallel Histogram)
+
+| Kernel | Input | Time | Atomics/sec | Speedup |
+|--------|-------|------|-------------|---------|
+| Basic atomicAdd | 16M chars, 7 bins | 8.20 ms | 2,047 M | 1.0× |
+| Privatized (global mem) | — | 4.84 ms | 3,470 M | 1.7× |
+| Privatized (shared mem) | — | 2.12 ms | 7,902 M | 3.9× |
+| Coarsened contiguous | — | 1.88 ms | 8,919 M | 4.4× |
+| **Coarsened interleaved** | — | **1.09 ms** | **15,357 M** | **7.5×** |
+| Aggregated | — | 1.35 ms | 12,390 M | 6.1× |
+
+### Chapter 10 (Parallel Reduction)
+
+| Kernel | Input | Blocks×Threads | Time | Bandwidth |
+|--------|-------|----------------|------|-----------|
+| Simple (interleaved) | 2,048 | 1 × 1024 | 0.011 ms | 1.45 GB/s |
+| Convergent (stride-halving) | 2,048 | 1 × 1024 | 0.009 ms | 1.78 GB/s |
+| Shared memory | 2,048 | 1 × 1024 | 0.008 ms | 1.00 GB/s |
+| Multiblock | 131,072 | 256 × 256 | 0.024 ms | 22.17 GB/s |
+| Coarsened (CF=4) | 262,144 | 128 × 256 | 0.025 ms | **42.45 GB/s** |
+
+### Chapter 11 (Prefix Sum / Scan)
+
+| Kernel | Input | Elements/block | Time | Bandwidth |
+|--------|-------|----------------|------|-----------|
+| Kogge-Stone (segmented) | 4,096 | 1,024 | 0.008 ms | 4.00 GB/s |
+| Brent-Kung (work-efficient) | 8,192 | 2,048 | 0.011 ms | 5.82 GB/s |
+| Coarsened (CF=4) | 16,384 | 4,096 | 0.011 ms | **11.64 GB/s** |
+| Hierarchical segmented | 32,768 | 1,024 | 0.066 ms* | 4.00 GB/s |
+
+*\*3-kernel total time. All single-kernel segmented scans produce per-block results; only the hierarchical kernel produces a full cumulative scan.*
 
 ---
 

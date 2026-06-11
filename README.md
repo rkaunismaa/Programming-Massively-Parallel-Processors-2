@@ -1,6 +1,6 @@
 # Programming Massively Parallel Processors — CUDA Implementation
 
-<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-11%20chapters%20complete-blue" alt="Chapters">
+<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-13%20chapters%20complete-blue" alt="Chapters">
 
 Hands-on CUDA implementations of every kernel from **Programming Massively Parallel Processors: A Hands-on Approach** (4th Edition, Kirk, Hwu & El Hajj, Morgan Kaufmann 2023).
 
@@ -23,7 +23,9 @@ All code targets a **NVIDIA GeForce GTX 1050** (Pascal, sm_61, 5 SMs, 2 GB VRAM)
 | **9** | **Parallel Histogram** | **basic, privatized_global, privatized_shared, coarsened_contiguous, coarsened_interleaved, aggregated** | **✅** |
 | 10 | Reduction & Minimizing Divergence | simple, convergent, shared_memory, multiblock, coarsened | ✅ |
 | **11** | **Prefix Sum (Scan)** | **Kogge-Stone, Brent-Kung, coarsened, hierarchical segmented** | **✅** |
-| 12–19 | (Advanced topics) | — | ⏳ |
+|| 12 | Merge | basic, tiled, circular_buffer | ✅ |
+|| **13** | **Sorting** | **basic_radix_sort, tiled_radix_sort, merge_sort** | **✅** |
+|| 14–19 | (Advanced topics) | — | ⏳ |
 
 ---
 
@@ -49,7 +51,7 @@ Chapters in this project were created using different LLM models:
 | Chapter(s) | Model |
 |------------|-------|
 | 1–7 | Qwen 3.6-27B (via LM Studio, hosted at `https://lmstudio.ai/models/qwen/qwen3.6-27b`) |
-| 8+ | DeepSeek V4 Flash |
+| 8–13 | DeepSeek V4 Flash |
 
 This information is tracked in case code style, naming conventions, or behavioural quirks need tracing back to a particular model.
 

@@ -58,3 +58,19 @@ chapters/ch10_reduction/ch10_convergent_reduction
 chapters/ch10_reduction/ch10_shared_memory_reduction
 chapters/ch10_reduction/ch10_multiblock_reduction
 chapters/ch10_reduction/ch10_coarsened_reduction
+
+# ch11_prefix_scan binaries
+chapters/ch11_prefix_scan/ch11_kogge_stone_scan
+chapters/ch11_prefix_scan/ch11_brent_kung_scan
+chapters/ch11_prefix_scan/ch11_coarsened_scan
+chapters/ch11_prefix_scan/ch11_segmented_scan
+# ch12_merge binaries
+chapters/ch12_merge/basic_merge
+chapters/ch12_merge/tiled_merge
+chapters/ch12_merge/circular_buffer_merge
+# ch13_sorting binaries
+chapters/ch13_sorting/basic_radix_sort
+chapters/ch13_sorting/tiled_radix_sort
+chapters/ch13_sorting/merge_sort
+chapters/ch13_sorting/test_blocks
+chapters/ch13_sorting/debug_radix16

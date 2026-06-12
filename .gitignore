@@ -87,3 +87,10 @@ chapters/ch14_sparse_matrix/ch14_coo_to_csr
 chapters/ch16_deep_learning/ch16_conv_forward
 chapters/ch16_deep_learning/ch16_unroll
 chapters/ch16_deep_learning/ch16_conv_gemm
+# ch17_iterative_mri binaries
+chapters/ch17_iterative_mri/ch17_fhd_scatter
+chapters/ch17_iterative_mri/ch17_fhd_gather
+chapters/ch17_iterative_mri/ch17_fhd_register
+chapters/ch17_iterative_mri/ch17_fhd_constant
+chapters/ch17_iterative_mri/ch17_fhd_struct
+chapters/ch17_iterative_mri/ch17_fhd_optimized

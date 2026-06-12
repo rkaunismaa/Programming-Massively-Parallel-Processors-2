@@ -1,6 +1,6 @@
 # Programming Massively Parallel Processors — CUDA Implementation
 
-<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-16%20chapters%20complete-blue" alt="Chapters">
+<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-17%20chapters%20complete-blue" alt="Chapters">
 
 Hands-on CUDA implementations of every kernel from **Programming Massively Parallel Processors: A Hands-on Approach** (4th Edition, Kirk, Hwu & El Hajj, Morgan Kaufmann 2023).
 
@@ -28,7 +28,8 @@ All code targets a **NVIDIA GeForce GTX 1050** (Pascal, sm_61, 5 SMs, 2 GB VRAM)
 || **14** | **Sparse Matrix Computation** | **spmv_coo, spmv_csr, spmv_ell, hybrid_ell_coo, spmv_jds, coo_to_csr** | **✅** |
 || **15** | **Graph Traversal** | **bfs_push, bfs_pull, bfs_edge, bfs_frontier, bfs_privatized, direction_opt, singleblock** | **✅** |
 || 16 | Deep Learning | conv_forward, unroll, conv_gemm | ✅ |
-|| 17–19 | (Advanced topics) | — | ⏳ |
+|| **17** | **Iterative MRI Reconstruction** | **fhd_scatter, fhd_gather, fhd_register, fhd_constant, fhd_struct, fhd_optimized** | **✅** |
+|| 18–19 | (Advanced topics) | — | ⏳ |
 
 ---
 
@@ -150,6 +151,14 @@ PMPP/
 │   │   ├── ch16_conv_forward.cu
 │   │   ├── ch16_unroll.cu
 │   │   ├── ch16_conv_gemm.cu
+│   │   └── README.md
+│   ├── ch17_iterative_mri/
+│   │   ├── ch17_fhd_scatter.cu
+│   │   ├── ch17_fhd_gather.cu
+│   │   ├── ch17_fhd_register.cu
+│   │   ├── ch17_fhd_constant.cu
+│   │   ├── ch17_fhd_struct.cu
+│   │   ├── ch17_fhd_optimized.cu
 │   │   └── README.md
 │   └── ...               # Future chapters
 ├── .gitignore

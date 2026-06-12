@@ -87,6 +87,10 @@ chapters/ch14_sparse_matrix/ch14_coo_to_csr
 chapters/ch16_deep_learning/ch16_conv_forward
 chapters/ch16_deep_learning/ch16_unroll
 chapters/ch16_deep_learning/ch16_conv_gemm
+# ch18 binaries
+chapters/ch18_electrostatic/ch18_dcs_gather
+chapters/ch18_electrostatic/ch18_dcs_coarsened
+chapters/ch18_electrostatic/ch18_dcs_coalesced
 # ch17_iterative_mri binaries
 chapters/ch17_iterative_mri/ch17_fhd_scatter
 chapters/ch17_iterative_mri/ch17_fhd_gather

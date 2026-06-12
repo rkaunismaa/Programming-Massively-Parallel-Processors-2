@@ -1,6 +1,6 @@
 # Programming Massively Parallel Processors — CUDA Implementation
 
-<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-20%20chapters%20complete-blue" alt="Chapters">
+<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-21%20chapters%20complete-blue" alt="Chapters">
 
 Hands-on CUDA implementations of every kernel from **Programming Massively Parallel Processors: A Hands-on Approach** (4th Edition, Kirk, Hwu & El Hajj, Morgan Kaufmann 2023).
 
@@ -32,7 +32,8 @@ All code targets a **NVIDIA GeForce GTX 1050** (Pascal, sm_61, 5 SMs, 2 GB VRAM)
 ||| **18** | **Electrostatic Potential Map** | **dcs_gather, dcs_coarsened, dcs_coalesced** | **✅** |
 ||| 19 | Parallel Programming & Computational Thinking | — (conceptual) | ✅ README only |
 ||| **20** | **Heterogeneous Computing Cluster** | **cuda_streams demo, exercises** | **✅** |
-||| 21–23 | (Dynamic Parallelism, Conclusion) | — | ⏳ |
+||| **21** | **CUDA Dynamic Parallelism** | **bezier_curves, quadtree** | **✅** |
+||| 22–23 | (Advanced Practices, Conclusion) | — | ⏳ |
 
 ---
 
@@ -65,6 +66,7 @@ Chapters in this project were created using different LLM models:
 ||| 18 | DeepSeek V4 Pro |
 ||| 19 | DeepSeek V4 Pro |
 ||| 20 | DeepSeek V4 Pro |
+||| 21 | DeepSeek V4 Pro |
 
 This information is tracked in case code style, naming conventions, or behavioural quirks need tracing back to a particular model.
 
@@ -177,6 +179,11 @@ PMPP/
 │   ├── ch20_heterogeneous_cluster/
 │   │   ├── ch20_cuda_streams.cu
 │   │   ├── ch20_exercises.cu
+│   │   └── README.md
+│   ├── ch21_dynamic_parallelism/
+│   │   ├── ch21_bezier_curves.cu
+│   │   ├── ch21_quadtree.cu
+│   │   ├── ch21_exercises.cu
 │   │   └── README.md
 │   └── ...               # Future chapters
 ├── .gitignore

@@ -91,6 +91,9 @@ chapters/ch16_deep_learning/ch16_conv_gemm
 chapters/ch18_electrostatic/ch18_dcs_gather
 chapters/ch18_electrostatic/ch18_dcs_coarsened
 chapters/ch18_electrostatic/ch18_dcs_coalesced
+# ch20 binaries
+chapters/ch20_heterogeneous_cluster/ch20_cuda_streams
+chapters/ch20_heterogeneous_cluster/ch20_exercises
 # ch17_iterative_mri binaries
 chapters/ch17_iterative_mri/ch17_fhd_scatter
 chapters/ch17_iterative_mri/ch17_fhd_gather

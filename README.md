@@ -1,6 +1,6 @@
 # Programming Massively Parallel Processors — CUDA Implementation
 
-<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-14%20chapters%20complete-blue" alt="Chapters">
+<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-15%20chapters%20complete-blue" alt="Chapters">
 
 Hands-on CUDA implementations of every kernel from **Programming Massively Parallel Processors: A Hands-on Approach** (4th Edition, Kirk, Hwu & El Hajj, Morgan Kaufmann 2023).
 
@@ -26,7 +26,8 @@ All code targets a **NVIDIA GeForce GTX 1050** (Pascal, sm_61, 5 SMs, 2 GB VRAM)
 || 12 | Merge | basic, tiled, circular_buffer | ✅ |
 || **13** | **Sorting** | **basic_radix_sort, tiled_radix_sort, merge_sort** | **✅** |
 || **14** | **Sparse Matrix Computation** | **spmv_coo, spmv_csr, spmv_ell, hybrid_ell_coo, spmv_jds, coo_to_csr** | **✅** |
-|| 15–19 | (Advanced topics) | — | ⏳ |
+|| **15** | **Graph Traversal** | **bfs_push, bfs_pull, bfs_edge, bfs_frontier, bfs_privatized, direction_opt, singleblock** | **✅** |
+| 16–19 | (Advanced topics) | — | ⏳ |
 
 ---
 
@@ -53,6 +54,7 @@ Chapters in this project were created using different LLM models:
 |------------|-------|
 | 1–7 | Qwen 3.6-27B (via LM Studio, hosted at `https://lmstudio.ai/models/qwen/qwen3.6-27b`) |
 | 8–14 | DeepSeek V4 Flash |
+| 15 | DeepSeek V4 Pro |
 
 This information is tracked in case code style, naming conventions, or behavioural quirks need tracing back to a particular model.
 
@@ -132,6 +134,15 @@ PMPP/
 │   │   ├── ch14_spmv_hybrid_ell_coo.cu
 │   │   ├── ch14_spmv_jds.cu
 │   │   ├── ch14_coo_to_csr.cu
+│   │   └── README.md
+│   ├── ch15_graph_traversal/
+│   │   ├── ch15_bfs_push.cu
+│   │   ├── ch15_bfs_pull.cu
+│   │   ├── ch15_bfs_edge.cu
+│   │   ├── ch15_bfs_frontier.cu
+│   │   ├── ch15_bfs_privatized.cu
+│   │   ├── ch15_bfs_direction_opt.cu
+│   │   ├── ch15_bfs_singleblock.cu
 │   │   └── README.md
 │   └── ...               # Future chapters
 ├── .gitignore
@@ -243,7 +254,23 @@ All kernels share a common header providing:
 | Coarsened (CF=4) | 16,384 | 4,096 | 0.011 ms | **11.64 GB/s** |
 | Hierarchical segmented | 32,768 | 1,024 | 0.066 ms* | 4.00 GB/s |
 
-*\*3-kernel total time. All single-kernel segmented scans produce per-block results; only the hierarchical kernel produces a full cumulative scan.*
+*\\*3-kernel total time. All single-kernel segmented scans produce per-block results; only the hierarchical kernel produces a full cumulative scan.*
+
+### Chapter 15 (Graph Traversal — BFS)
+
+| Kernel | Vertices | Edges | Root | Validation |
+|--------|----------|-------|------|:----------:|
+| Push (top-down, CSR) | 9 | 15 | 0 | PASS |
+| Pull (bottom-up, CSC) | 9 | 15 | 0 | PASS |
+| Edge-centric (COO) | 9 | 15 | 0 | PASS |
+| Frontier (CSR + atomicCAS) | 9 | 15 | 0 | PASS |
+| Privatized (shared mem) | 9 | 15 | 0 | PASS |
+| Direction-optimized (Ex2) | 9 | 15 | 0 | PASS |
+| Single-block multi-level (Ex3) | 9 | 15 | 0 | PASS |
+
+BFS levels from root 0: `0 1 1 2 2 2 2 2 3`
+
+> **Note:** This is a tiny 9-vertex pedagogical graph. All timings are dominated by kernel launch overhead (~11–20 ms). Meaningful performance data requires larger graphs.
 
 ---
 

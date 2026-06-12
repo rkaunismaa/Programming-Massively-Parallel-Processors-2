@@ -1,6 +1,6 @@
 # Programming Massively Parallel Processors — CUDA Implementation
 
-<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-13%20chapters%20complete-blue" alt="Chapters">
+<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-14%20chapters%20complete-blue" alt="Chapters">
 
 Hands-on CUDA implementations of every kernel from **Programming Massively Parallel Processors: A Hands-on Approach** (4th Edition, Kirk, Hwu & El Hajj, Morgan Kaufmann 2023).
 
@@ -25,7 +25,8 @@ All code targets a **NVIDIA GeForce GTX 1050** (Pascal, sm_61, 5 SMs, 2 GB VRAM)
 | **11** | **Prefix Sum (Scan)** | **Kogge-Stone, Brent-Kung, coarsened, hierarchical segmented** | **✅** |
 || 12 | Merge | basic, tiled, circular_buffer | ✅ |
 || **13** | **Sorting** | **basic_radix_sort, tiled_radix_sort, merge_sort** | **✅** |
-|| 14–19 | (Advanced topics) | — | ⏳ |
+|| **14** | **Sparse Matrix Computation** | **spmv_coo, spmv_csr, spmv_ell, hybrid_ell_coo, spmv_jds, coo_to_csr** | **✅** |
+|| 15–19 | (Advanced topics) | — | ⏳ |
 
 ---
 
@@ -51,7 +52,7 @@ Chapters in this project were created using different LLM models:
 | Chapter(s) | Model |
 |------------|-------|
 | 1–7 | Qwen 3.6-27B (via LM Studio, hosted at `https://lmstudio.ai/models/qwen/qwen3.6-27b`) |
-| 8–13 | DeepSeek V4 Flash |
+| 8–14 | DeepSeek V4 Flash |
 
 This information is tracked in case code style, naming conventions, or behavioural quirks need tracing back to a particular model.
 
@@ -119,6 +120,18 @@ PMPP/
 │   │   ├── ch11_brent_kung_scan.cu
 │   │   ├── ch11_coarsened_scan.cu
 │   │   ├── ch11_segmented_scan.cu
+│   │   └── README.md
+│   ├── ch13_sorting/
+│   │   ├── ch13_basic_radix_sort.cu
+│   │   ├── ch13_tiled_radix_sort.cu
+│   │   └── ch13_merge_sort.cu
+│   ├── ch14_sparse_matrix/
+│   │   ├── ch14_spmv_coo.cu
+│   │   ├── ch14_spmv_csr.cu
+│   │   ├── ch14_spmv_ell.cu
+│   │   ├── ch14_spmv_hybrid_ell_coo.cu
+│   │   ├── ch14_spmv_jds.cu
+│   │   ├── ch14_coo_to_csr.cu
 │   │   └── README.md
 │   └── ...               # Future chapters
 ├── .gitignore

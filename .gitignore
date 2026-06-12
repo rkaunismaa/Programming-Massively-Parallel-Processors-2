@@ -74,3 +74,12 @@ chapters/ch13_sorting/tiled_radix_sort
 chapters/ch13_sorting/merge_sort
 chapters/ch13_sorting/test_blocks
 chapters/ch13_sorting/debug_radix16
+# ch12_merge test (add missing)
+chapters/ch12_merge/circular_buffer_merge_test
+# ch14_sparse_matrix binaries
+chapters/ch14_sparse_matrix/ch14_spmv_coo
+chapters/ch14_sparse_matrix/ch14_spmv_csr
+chapters/ch14_sparse_matrix/ch14_spmv_ell
+chapters/ch14_sparse_matrix/ch14_spmv_hybrid_ell_coo
+chapters/ch14_sparse_matrix/ch14_spmv_jds
+chapters/ch14_sparse_matrix/ch14_coo_to_csr

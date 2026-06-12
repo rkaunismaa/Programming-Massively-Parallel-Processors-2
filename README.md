@@ -1,6 +1,6 @@
 # Programming Massively Parallel Processors — CUDA Implementation
 
-<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-17%20chapters%20complete-blue" alt="Chapters">
+<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-19%20chapters%20complete-blue" alt="Chapters">
 
 Hands-on CUDA implementations of every kernel from **Programming Massively Parallel Processors: A Hands-on Approach** (4th Edition, Kirk, Hwu & El Hajj, Morgan Kaufmann 2023).
 
@@ -29,7 +29,9 @@ All code targets a **NVIDIA GeForce GTX 1050** (Pascal, sm_61, 5 SMs, 2 GB VRAM)
 || **15** | **Graph Traversal** | **bfs_push, bfs_pull, bfs_edge, bfs_frontier, bfs_privatized, direction_opt, singleblock** | **✅** |
 || 16 | Deep Learning | conv_forward, unroll, conv_gemm | ✅ |
 || **17** | **Iterative MRI Reconstruction** | **fhd_scatter, fhd_gather, fhd_register, fhd_constant, fhd_struct, fhd_optimized** | **✅** |
-|| 18–19 | (Advanced topics) | — | ⏳ |
+||| **18** | **Electrostatic Potential Map** | **dcs_gather, dcs_coarsened, dcs_coalesced** | **✅** |
+||| 19 | Parallel Programming & Computational Thinking | — (conceptual) | ✅ README only |
+||| 20–23 | (MPI, Dynamic Parallelism, Conclusion) | — | ⏳ |
 
 ---
 
@@ -55,9 +57,12 @@ Chapters in this project were created using different LLM models:
 | Chapter(s) | Model |
 |------------|-------|
 | 1–7 | Qwen 3.6-27B (via LM Studio, hosted at `https://lmstudio.ai/models/qwen/qwen3.6-27b`) |
-| 8–14 | DeepSeek V4 Flash |
-|| 15 | DeepSeek V4 Pro |
-|| 16 | DeepSeek V4 Pro |
+|| 8–14 | DeepSeek V4 Flash |
+||| 15 | DeepSeek V4 Pro |
+||| 16 | DeepSeek V4 Pro |
+||| 17 | DeepSeek V4 Flash |
+||| 18 | DeepSeek V4 Pro |
+||| 19 | DeepSeek V4 Pro |
 
 This information is tracked in case code style, naming conventions, or behavioural quirks need tracing back to a particular model.
 
@@ -159,6 +164,13 @@ PMPP/
 │   │   ├── ch17_fhd_constant.cu
 │   │   ├── ch17_fhd_struct.cu
 │   │   ├── ch17_fhd_optimized.cu
+│   │   └── README.md
+│   ├── ch18_electrostatic/
+│   │   ├── ch18_dcs_gather.cu
+│   │   ├── ch18_dcs_coarsened.cu
+│   │   ├── ch18_dcs_coalesced.cu
+│   │   └── README.md
+│   ├── ch19_computational_thinking/
 │   │   └── README.md
 │   └── ...               # Future chapters
 ├── .gitignore
@@ -287,6 +299,45 @@ All kernels share a common header providing:
 BFS levels from root 0: `0 1 1 2 2 2 2 2 3`
 
 > **Note:** This is a tiny 9-vertex pedagogical graph. All timings are dominated by kernel launch overhead (~11–20 ms). Meaningful performance data requires larger graphs.
+
+### Chapter 16 (Deep Learning — CNN Inference)
+
+| Kernel | Input | Time | Validation |
+|--------|-------|------|:----------:|
+| conv_forward (direct) | N=2 C=3 H=18 W=18 K=3 M=4 | — | PASS |
+| unroll + GEMM verify | C=3 H=5 W=5 K=2 M=2 | — | PASS |
+| conv_gemm (tiled 16×16) | N=2 C=3 H=12 W=12 K=3 M=4 | — | PASS |
+
+### Chapter 17 (Iterative MRI — FHD)
+
+| Kernel | M samples | N voxels | Validation |
+|--------|-----------|----------|:----------:|
+| fhd_scatter | 512 | 64 | PASS |
+| fhd_gather | 512 | 64 | PASS |
+| fhd_register | 1024 | 256 | PASS |
+| fhd_constant | 2048 | 512 | PASS |
+| fhd_struct | 2048 | 512 | PASS |
+| fhd_optimized | 8192 | 512 | PASS (tol 5e-3) |
+
+> 52.3× vs CPU on GTX 1050 (fhd_optimized, M=8192, N=512). HW trig tolerance 5e-3.
+
+### Chapter 18 (Electrostatic Potential Map — DCS)
+
+| Kernel | 64×64, 2K atoms | 128×128, 8K atoms | 256×256, 8K atoms |
+|--------|:---:|:----:|:----:|
+| dcs_gather (Fig 18.6) | 0.47 ms | 6.42 ms | 26.77 ms |
+| dcs_coarsened (Fig 18.8) | 0.98 ms | 6.15 ms | 19.66 ms |
+| dcs_coalesced (Fig 18.10) | 1.53 ms | 5.98 ms | 19.39 ms |
+
+> Thread coarsening + coalescing yields 27.6% speedup at 256×256. At small grids, basic gather is fastest (coarsening overhead dominates).
+
+### Chapter 14 (Sparse Matrix — SpMV)
+
+| Kernel | Matrix | Nonzeros | Throughput |
+|--------|--------|:--------:|:----------:|
+| SpMV/COO | 1024×1024, 1% | 10,718 | 905 M nz/s |
+| SpMV/CSR | 4096×4096, 0.5% | 83,909 | 2,084 M nz/s |
+| SpMV/ELL | 4096×4096, 0.5% | 83,659 | 2,483 M nz/s |
 
 ---
 

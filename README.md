@@ -1,6 +1,6 @@
 # Programming Massively Parallel Processors — CUDA Implementation
 
-<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-15%20chapters%20complete-blue" alt="Chapters">
+<img src="https://img.shields.io/badge/CUDA-12.x-76B900?logo=nvidia" alt="CUDA"> <img src="https://img.shields.io/badge/Target-GTX%201050%20(sm__61)-success" alt="GTX 1050"> <img src="https://img.shields.io/badge/Status-16%20chapters%20complete-blue" alt="Chapters">
 
 Hands-on CUDA implementations of every kernel from **Programming Massively Parallel Processors: A Hands-on Approach** (4th Edition, Kirk, Hwu & El Hajj, Morgan Kaufmann 2023).
 
@@ -27,7 +27,8 @@ All code targets a **NVIDIA GeForce GTX 1050** (Pascal, sm_61, 5 SMs, 2 GB VRAM)
 || **13** | **Sorting** | **basic_radix_sort, tiled_radix_sort, merge_sort** | **✅** |
 || **14** | **Sparse Matrix Computation** | **spmv_coo, spmv_csr, spmv_ell, hybrid_ell_coo, spmv_jds, coo_to_csr** | **✅** |
 || **15** | **Graph Traversal** | **bfs_push, bfs_pull, bfs_edge, bfs_frontier, bfs_privatized, direction_opt, singleblock** | **✅** |
-| 16–19 | (Advanced topics) | — | ⏳ |
+|| 16 | Deep Learning | conv_forward, unroll, conv_gemm | ✅ |
+|| 17–19 | (Advanced topics) | — | ⏳ |
 
 ---
 
@@ -54,7 +55,8 @@ Chapters in this project were created using different LLM models:
 |------------|-------|
 | 1–7 | Qwen 3.6-27B (via LM Studio, hosted at `https://lmstudio.ai/models/qwen/qwen3.6-27b`) |
 | 8–14 | DeepSeek V4 Flash |
-| 15 | DeepSeek V4 Pro |
+|| 15 | DeepSeek V4 Pro |
+|| 16 | DeepSeek V4 Pro |
 
 This information is tracked in case code style, naming conventions, or behavioural quirks need tracing back to a particular model.
 
@@ -143,6 +145,11 @@ PMPP/
 │   │   ├── ch15_bfs_privatized.cu
 │   │   ├── ch15_bfs_direction_opt.cu
 │   │   ├── ch15_bfs_singleblock.cu
+│   │   └── README.md
+│   ├── ch16_deep_learning/
+│   │   ├── ch16_conv_forward.cu
+│   │   ├── ch16_unroll.cu
+│   │   ├── ch16_conv_gemm.cu
 │   │   └── README.md
 │   └── ...               # Future chapters
 ├── .gitignore

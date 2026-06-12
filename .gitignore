@@ -83,3 +83,7 @@ chapters/ch14_sparse_matrix/ch14_spmv_ell
 chapters/ch14_sparse_matrix/ch14_spmv_hybrid_ell_coo
 chapters/ch14_sparse_matrix/ch14_spmv_jds
 chapters/ch14_sparse_matrix/ch14_coo_to_csr
+# ch16_deep_learning binaries
+chapters/ch16_deep_learning/ch16_conv_forward
+chapters/ch16_deep_learning/ch16_unroll
+chapters/ch16_deep_learning/ch16_conv_gemm
